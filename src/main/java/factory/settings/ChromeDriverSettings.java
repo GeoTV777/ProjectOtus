@@ -11,6 +11,8 @@ public class ChromeDriverSettings implements IDriverSettings{
 
         chromeOptions.addArguments("--no-sanbox");
         chromeOptions.addArguments("--no-first-run");
+        chromeOptions.addArguments("--start-maximized");
+        chromeOptions.addArguments("--start-fullscreen");
 
         return chromeOptions;
     }
