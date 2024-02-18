@@ -53,41 +53,8 @@ public class CatalogPage extends AbsBasePage{
         return lessonDuration.get(--index).getText();
     }
     //  данный метод выполняет запрос к указанной веб-странице и возвращает ее DOM-структуру в виде объекта `Document`.
-    private Document getDomPage(int index) throws IOException {
+    protected Document getDomPage(int index) throws IOException {
         String url = lessonsTiles.get(--index).getAttribute("href");
-       return Jsoup.connect(url).get();
+        return Jsoup.connect(url).get();
     }
-    // проверка заголовка по индексу LessonPage
-    public void checkHeaderLessonByIndex(int index, String expectedHeader) throws IOException {
-        Document dom = getDomPage(index);
-        Element headerPageElement = dom.selectFirst("h1");
-        Assertions.assertEquals(expectedHeader, headerPageElement.text(), "");
-    }
-        //добавить ошибку!!
-
-    //  проверка остальных заголовков по индексу LessonPage
-    public void checkDescriptionLessonByIndex(int index) throws IOException{
-//        Elements elements = getDomPage(index).selectXpath("//div[contains(@class,'dZDxRw')]");
-//        if (elements.isEmpty()){
-//            elements = getDomPage(index).selectXpath("//h1/following-sibling::div/p[text]");
-//        }
-        Element headerPageElement = getDomPage(index).selectXpath("//div[contains(@class,'dZDxRw')]").get(0);
-        Assertions.assertFalse(headerPageElement.text().isEmpty(),"");
-    }
-        //добавить ошибку!!
-    //  проверка продолжительности курса из LessonPage
-    public void checkLessonDuration(int index, String expectedDuration)throws IOException{
-        Element headerPageElement = getDomPage(index)
-                .selectXpath("//div/following-sibling::p[contains(text(),'месяц')]").get(0);
-        Assertions.assertEquals(expectedDuration.replaceAll("^.*?·\\s*",""), headerPageElement.text(),"");
-
-        //добавить ошибку!!
-    }
-    // проверка формата обучения LessonPage
-    public void checkLessonFormat(int index, String format) throws IOException {
-        Element formatLessonElement = getDomPage(index)
-                .selectXpath(String.format("//p[contains(text(),'%s')]",format)).get(0);
-        Assertions.assertFalse(formatLessonElement.text().isEmpty(),"");
-    }
-         //добавить ошибку!!
 }

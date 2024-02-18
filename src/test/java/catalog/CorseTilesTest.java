@@ -53,16 +53,15 @@ public class CorseTilesTest {
     public void checkDataOnLessonPage()throws IOException {
         for(int i=1; i<catalogPage.getTilesNumbers(); i++){
             String expectedHeader = catalogPage.getLessonNameByIndex(i);
+            LessonPage lessonPage=new LessonPage(driver,"/avtomatizaciya-web-testirovaniya/");
             String expectedLessonDuration = catalogPage.getLessonDuration(i);
 
-            catalogPage.checkHeaderLessonByIndex(i,expectedHeader);
-            catalogPage.checkDescriptionLessonByIndex(i);
-            catalogPage.checkLessonDuration(i,expectedLessonDuration);
-            catalogPage.checkLessonFormat(i,"Онлайн");
+            lessonPage.checkHeaderLessonByIndex(i,expectedHeader);
+            lessonPage.checkDescriptionLessonByIndex(i);
+            lessonPage.checkLessonDuration(i,expectedLessonDuration);
+            lessonPage.checkLessonFormat(i,"Онлайн");
         }
         catalogPage.clickRandomLessonsTile();
-        LessonPage lessonPage=new LessonPage(driver,"");
-        //  и перенести методы касающиеся внутренности курса (карточки)  в класс LessonPage
 
     }
 
