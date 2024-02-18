@@ -28,6 +28,7 @@ public class CorseTilesTest {
         public void init() throws BrowserNotSupportedExeption{
         ChromeDriverSettings driverSettings = new ChromeDriverSettings();
         this.driver = new DriverFactory(driverSettings).create();
+
         List<String> queryParams = new ArrayList<>();
         queryParams.add(String.format("categories=%s", LessonsCategoryData.TESTING.name().toLowerCase(Locale.ROOT)));
 
@@ -61,7 +62,7 @@ public class CorseTilesTest {
         }
         catalogPage.clickRandomLessonsTile();
         LessonPage lessonPage=new LessonPage(driver,"");
-        //  и перенести методы касающиеся внутренности курса (карточки)
+        //  и перенести методы касающиеся внутренности курса (карточки)  в класс LessonPage
 
     }
 

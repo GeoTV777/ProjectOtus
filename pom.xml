@@ -89,7 +89,7 @@
                 <version>${surefire.plugin.version}</version>
                 <configuration>
                     <systemProperties>
-                        <browser.name>${browser.name}}</browser.name>
+                        <browser.name>${browser.name}</browser.name>
                         <base.url>${base.url}</base.url>
                     </systemProperties>
                 </configuration>
