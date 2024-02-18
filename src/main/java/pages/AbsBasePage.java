@@ -16,7 +16,7 @@ public class AbsBasePage extends AbsCommon {
         this.path = path.endsWith("/") ? path.substring(0, path.length() -1): path;
     }
 
-    public void open(String path) {
+    public void open() {
         driver.get(BASE_URL + path);
     }
     public void open(List<String> queryParams) {

@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CorseTilesTest {
+public class CourseTiles_Test {
 
     private WebDriver driver;
     private CatalogPage catalogPage =null;
-    private Logger logger = (Logger) LogManager.getLogger("Autotest");
+    private Logger logger = (Logger) LogManager.getLogger("ProjectOtus");
 
     @BeforeEach
         public void init() throws BrowserNotSupportedExeption{

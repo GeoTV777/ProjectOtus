@@ -10,30 +10,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class WaitTools {
-
+    private int waiterTimeout = Integer.parseInt(System.getProperty("wait.timeout","10"));
     private WebDriver driver;
-    private WebDriverWait wait;
 
-    public WaitTools(org.openqa.selenium.WebDriver driver){
+    public WaitTools(WebDriver driver){
         this.driver = driver;
     }
-
-
     public boolean waitForCondition(ExpectedCondition condition) {
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(20)).until(condition);
+            new WebDriverWait(driver, Duration.ofSeconds(waiterTimeout)).until(condition);
             return true;
-        } catch (TimeoutException ignore){
+        }   catch (TimeoutException ignored){
             return false;
         }
     }
-    public boolean waitNotElementPresent(By locator) {
-        return this.waitForCondition(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(locator)));
-    }
-    public boolean waitElementPresent(By locator) {
-        return this.waitForCondition(ExpectedConditions.presenceOfElementLocated(locator));
-    }
-    public boolean waitElementToBeClickable (By locator){
-        return this.waitForCondition(ExpectedConditions.elementToBeClickable(locator));
-    }
+
 }

@@ -23,34 +23,28 @@ public class LessonPage extends AbsBasePage {
     public void checkHeaderLessonByIndex(int index, String expectedHeader) throws IOException {
         Document dom =catalogPage.getDomPage(index);
         Element headerPageElement = dom.selectFirst("h1");
-        Assertions.assertEquals(expectedHeader, headerPageElement.text(), "");
+        Assertions.assertEquals(expectedHeader, headerPageElement.text(), "The header does not match the expected value");
     }
-    //добавить ошибку!!
+
 
     //  проверка остальных заголовков по индексу LessonPage
     public void checkDescriptionLessonByIndex(int index) throws IOException{
-//        Elements elements = getDomPage(index).selectXpath("//div[contains(@class,'dZDxRw')]");
-//        if (elements.isEmpty()){
-//            elements = getDomPage(index).selectXpath("//h1/following-sibling::div/p[text]");
-//        }
         Element headerPageElement = catalogPage.getDomPage(index).selectXpath("//div[contains(@class,'dZDxRw')]").get(0);
-        Assertions.assertFalse(headerPageElement.text().isEmpty(),"");
+        Assertions.assertFalse(headerPageElement.text().isEmpty(),"The header does not match the expected value");
     }
-    //добавить ошибку!!
+
     //  проверка продолжительности курса из LessonPage
     public void checkLessonDuration(int index, String expectedDuration)throws IOException{
         Element headerPageElement = catalogPage.getDomPage(index)
                 .selectXpath("//div/following-sibling::p[contains(text(),'месяц')]").get(0);
-        Assertions.assertEquals(expectedDuration.replaceAll("^.*?·\\s*",""), headerPageElement.text(),"");
-
-        //добавить ошибку!!
+        Assertions.assertEquals(expectedDuration.replaceAll("^.*?·\\s*",""), headerPageElement.text(),"The duration of the course is as expected");
     }
+
     // проверка формата обучения LessonPage
     public void checkLessonFormat(int index, String format) throws IOException {
         Element formatLessonElement = catalogPage.getDomPage(index)
                 .selectXpath(String.format("//p[contains(text(),'%s')]",format)).get(0);
-        Assertions.assertFalse(formatLessonElement.text().isEmpty(),"");
+        Assertions.assertFalse(formatLessonElement.text().isEmpty(),"The course format is not as expected");
     }
-    //добавить ошибку!!
 
 }
