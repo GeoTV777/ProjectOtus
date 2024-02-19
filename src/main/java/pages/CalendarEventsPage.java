@@ -20,7 +20,7 @@ public class CalendarEventsPage extends AbsBasePage{
     @FindBy(css = ".dod_new-event")
     private List<WebElement> eventTiles;
 //    @FindBy(css = ".dod_new-event__icon~.dod_new-event__date-text")
-    @FindBy(css = ".dod_new-event__icon~.dod_new-event__date-text")
+    @FindBy(css = ".dod_new-event__calendar-icon ~span")
     private List<WebElement>dateEvents;
 
     public CalendarEventsPage checkEventTilesShouldBeSameAs() {
