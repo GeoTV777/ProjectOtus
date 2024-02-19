@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import tools.WaitTools;
 
-public class AbsCommon {
+public  abstract class AbsCommon {
     protected WebDriver driver;
     protected WaitTools waitTools;
     protected Actions actions;

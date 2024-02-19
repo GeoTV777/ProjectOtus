@@ -1,6 +1,6 @@
 package events;
 
-import data.catalog.LessonsCategoryData;
+import data.sorted.EventTypeData;
 import exeption.BrowserNotSupportedExeption;
 import factory.DriverFactory;
 import factory.settings.ChromeDriverSettings;
@@ -11,11 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pages.CalendarEventsPage;
-import pages.CatalogPage;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class EventsPage_Test {
     private WebDriver driver;
@@ -42,9 +37,15 @@ public class EventsPage_Test {
     @Test
     public void eventsTiles() {
         calendarEventsPage
-                .checkEventTilesShouldBeSameAs()
+                .checkEventTilesShouldBeVisible()
                 .checkStartEventDate();
-
+    }
+    @Test
+    public void selectSortedEventsType() {
+        calendarEventsPage
+                .selectSortedEventsType(EventTypeData.OPEN)
+                .checkEventTilesShouldBeVisible()
+                .checkEventsType(EventTypeData.OPEN);
     }
 
 

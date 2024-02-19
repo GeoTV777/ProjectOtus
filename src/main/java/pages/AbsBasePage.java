@@ -1,11 +1,13 @@
 package pages;
 
 import common.AbsCommon;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class AbsBasePage extends AbsCommon {
+public abstract class AbsBasePage extends AbsCommon {
     private String BASE_URL = System.getProperty("base.url");
 
     private String path =  "";
@@ -24,5 +26,12 @@ public class AbsBasePage extends AbsCommon {
 
         driver.get(url);
     }
+    public WebElement $(By by){
+        return driver.findElement(by);
+    }
 
+    public WebElement $(String locator) {
+        By by = locator.startsWith("/") ? By.xpath(locator): By.cssSelector(locator);
+        return this.$(by);
+    }
 }
