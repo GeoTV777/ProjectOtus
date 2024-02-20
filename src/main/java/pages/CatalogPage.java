@@ -1,18 +1,13 @@
 package pages;
 
-import org.checkerframework.checker.units.qual.A;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 
 public class CatalogPage extends AbsBasePage{
@@ -48,7 +43,7 @@ public class CatalogPage extends AbsBasePage{
     public String getLessonNameByIndex(int index) {
         return lessonsTiles.get(--index).findElement(By.xpath(".//h6")).getText();
     }
-    // получение продолжительности курса из LessonPage
+    // получение продолжительности курса из
     public String getLessonDuration(int index) {
         return lessonDuration.get(--index).getText();
     }

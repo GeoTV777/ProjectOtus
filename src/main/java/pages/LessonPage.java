@@ -1,15 +1,10 @@
 package pages;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import java.io.IOException;
-import java.util.List;
 
 public class LessonPage extends AbsBasePage {
 
@@ -23,7 +18,8 @@ public class LessonPage extends AbsBasePage {
     public void checkHeaderLessonByIndex(int index, String expectedHeader) throws IOException {
         Document dom =catalogPage.getDomPage(index);
         Element headerPageElement = dom.selectFirst("h1");
-        Assertions.assertEquals(expectedHeader, headerPageElement.text(), "The header does not match the expected value");
+        Assertions.assertEquals(expectedHeader, headerPageElement.text(),
+                "The header does not match the expected value");
     }
 
 
@@ -37,7 +33,8 @@ public class LessonPage extends AbsBasePage {
     public void checkLessonDuration(int index, String expectedDuration)throws IOException{
         Element headerPageElement = catalogPage.getDomPage(index)
                 .selectXpath("//div/following-sibling::p[contains(text(),'месяц')]").get(0);
-        Assertions.assertEquals(expectedDuration.replaceAll("^.*?·\\s*",""), headerPageElement.text(),"The duration of the course is as expected");
+        Assertions.assertEquals(expectedDuration.replaceAll("^.*?·\\s*",""),
+                headerPageElement.text(),"The duration of the course is as expected");
     }
 
     // проверка формата обучения LessonPage

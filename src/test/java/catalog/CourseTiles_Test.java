@@ -62,7 +62,6 @@ public class CourseTiles_Test {
             lessonPage.checkLessonFormat(i,"Онлайн");
         }
         catalogPage.clickRandomLessonsTile();
-
     }
 
 }

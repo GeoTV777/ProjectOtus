@@ -84,12 +84,11 @@ public class CalendarEventsPage extends AbsBasePage{
 
         return this;
     }
-
+    // метод сортировки по заданному значению
     private CalendarEventsPage clickSortingItem(EventTypeData eventsSortedData) {
         $(String.format(dropdunSortingEventTemplate, eventsSortedData.getName())).click();
 
         return this;
-
     }
 
     public CalendarEventsPage selectSortedEventsType(EventTypeData eventsSortedData){
@@ -101,12 +100,12 @@ public class CalendarEventsPage extends AbsBasePage{
 
         return this;
     }
-
+    //  проверка соответствия типа события ожидаемому "Открытый вединар" в карточках
     public CalendarEventsPage checkEventsType(EventTypeData eventTypeData){
         for (WebElement element : eventsTypes) {
-            Assertions.assertEquals(eventTypeData.getName(),element.getText(), "");
-            // написать ошибку
+            Assertions.assertEquals(eventTypeData.getName(),element.getText(), "Element text does not match expected value");
         }
+
         return this;
     }
 
