@@ -4,6 +4,8 @@ import data.sorted.EventTypeData;
 import exeption.BrowserNotSupportedExeption;
 import factory.DriverFactory;
 import factory.settings.ChromeDriverSettings;
+import factory.settings.FirefoxDriverSettings;
+import factory.settings.IDriverSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -19,17 +21,30 @@ public class EventsPage_Test {
 
     @BeforeEach
     public void init() throws BrowserNotSupportedExeption {
-        ChromeDriverSettings driverSettings = new ChromeDriverSettings();
+        IDriverSettings driverSettings = null;
+        String browserName = System.getProperty("browser.name");
+
+        switch (browserName.toLowerCase()) {
+            case "chrome":
+                driverSettings = new ChromeDriverSettings();
+                break;
+            case "firefox":
+                driverSettings = new FirefoxDriverSettings();
+                break;
+            default:
+                throw new BrowserNotSupportedExeption(browserName);
+        }
+
         this.driver = new DriverFactory(driverSettings).create();
 
         this.calendarEventsPage = new CalendarEventsPage(driver);
         calendarEventsPage.open();
+        logger.info("Open browser");
     }
 
     @AfterEach
     public void driverStop() {
         if (driver != null) {
-            driver.close();
             driver.quit();
             logger.info("Close browser");
         }
@@ -47,7 +62,5 @@ public class EventsPage_Test {
                 .checkEventTilesShouldBeVisible()
                 .checkEventsType(EventTypeData.OPEN);
     }
-
-
 
 }

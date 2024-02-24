@@ -26,14 +26,17 @@ public class CalendarEventsPage extends AbsBasePage{
     private List<WebElement> eventsTypes;
     private String dropduwnSortngEventsListSelector = ".dod_new-events-dropdown";
     private String dropduwnEventlistSelector = dropduwnSortngEventsListSelector + " .dod_new-events-dropdown__list";
-    private String dropdunSortingEventTemplate = dropduwnEventlistSelector + " [title='%s']";
+    private String dropduwnSortingEventTemplate = dropduwnEventlistSelector + " [title='%s']";
 
     public CalendarEventsPage checkEventTilesShouldBeVisible() {
         Assertions.assertTrue(waitTools.waitForCondition((ExpectedConditions.visibilityOfAllElements(eventTiles))));
 
-        return this;
-    }
+        logger.info("Event tiles are visible");
 
+        return this;
+
+    }
+ //  проверка, что даты не позднее настоящей
     public CalendarEventsPage  checkStartEventDate() {
         for(WebElement dateEvent: dateEvents) {
             LocalDate currentDate = LocalDate.now();
@@ -49,45 +52,52 @@ public class CalendarEventsPage extends AbsBasePage{
             Assertions.assertTrue(eventDate.isAfter(currentDate) || eventDate.isEqual(currentDate),
                     "The event date is not as expected or has already passed");
         }
+        logger.info("Event dates are not older than the present time");
         return this;
     }
+
     // проверка, что выпадающий список не открыт
     private CalendarEventsPage dropdownSortingEventsShouldNotBeOpened() {
         Assertions.assertTrue(
                 waitTools.waitForCondition(
                         ExpectedConditions.not(ExpectedConditions.attributeContains(
-                                $(dropduwnEventlistSelector), "class", ".dod_new-events-dropdown_opened")
+                                $(dropduwnSortngEventsListSelector), "class", ".dod_new-events-dropdown_opened")
                         )
                 )
         );
+        logger.info("Dropdown sorting events should not be opened");
         return this;
     }
     // проверка, что выпадающий список  открыт
     private CalendarEventsPage dropdownSortingEventsShouldBeOpened(){
-        Assertions.assertTrue(waitTools.waitForCondition(
-                ExpectedConditions.attributeContains(
-                        $(dropdunSortingEventTemplate), "class",".dod_new-events-dropdown_opened" )
-                )
-        );
+        waitTools.until(ExpectedConditions.attributeContains($(dropduwnEventlistSelector),
+                "class", ".dod_new-events-dropdown_opened"));
+
+        logger.info("Dropdown sorting events should be opened");
+
         return this;
+
     }
+
     //  метод клик
     private CalendarEventsPage openSortingEventsDropdown() {
         $(dropduwnSortngEventsListSelector).click();
 
+        logger.info("Click on the dropdown");
         return this;
     }
 
     // список видимый
     private CalendarEventsPage sortingItemsShouldBeVisible() {
         Assertions.assertTrue(waitTools.waitElementVisible($(dropduwnEventlistSelector)));
-
+        logger.info("Dropdown list visible");
         return this;
     }
     // метод сортировки по заданному значению
     private CalendarEventsPage clickSortingItem(EventTypeData eventsSortedData) {
-        $(String.format(dropdunSortingEventTemplate, eventsSortedData.getName())).click();
+        $(String.format(dropduwnSortingEventTemplate, eventsSortedData.getName())).click();
 
+        logger.info("Set value selected");
         return this;
     }
 
@@ -99,15 +109,16 @@ public class CalendarEventsPage extends AbsBasePage{
             .clickSortingItem(eventsSortedData);
 
         return this;
+
     }
-    //  проверка соответствия типа события ожидаемому "Открытый вединар" в карточках
+    //  проверка соответствия типа события ожидаемому "Открытый вебинар" в карточках
     public CalendarEventsPage checkEventsType(EventTypeData eventTypeData){
         for (WebElement element : eventsTypes) {
-            Assertions.assertEquals(eventTypeData.getName(),element.getText(), "Element text does not match expected value");
+            Assertions.assertEquals(eventTypeData.getName(),element.getText(),
+                    "Element text does not match expected value");
         }
-
+        logger.info("The event type is as expected");
         return this;
     }
-
 
 }

@@ -23,17 +23,21 @@ public class CatalogPage extends AbsBasePage{
     private List<WebElement> lessonDuration;
 
     // проверка того, что количество плиток должно быть 10
-    public void lessonTilesNumberShouldBeSameAs(int number) {
+    public CatalogPage lessonTilesNumberShouldBeSameAs(int number) {
         Assertions.assertEquals(
                 number,
                 lessonsTiles.size(),
-                String.format("Numbers jf lessons tiles should be %d", number)
+                String.format("Numbers of lessons tiles should be %d", number)
         );
+        logger.info("The number of tiles is equal to the given one");
+        return this;
     }
-    // случайный клик по плитке лекций
-    public void clickRandomLessonsTile() {
-        faker.options().nextElement(lessonsTiles).click();
-    }
+////     случайный клик по плитке лекций
+//    public CatalogPage clickRandomLessonsTile() {
+//        faker.options().nextElement(lessonsTiles).click();
+//        logger.info("Random tile clicked");
+//        return this;
+//    }
     // получение номера плитки
     public int getTilesNumbers() {
         return lessonsTiles.size();
@@ -41,13 +45,22 @@ public class CatalogPage extends AbsBasePage{
 
     //  получение название лекций по индексу из плиток
     public String getLessonNameByIndex(int index) {
-        return lessonsTiles.get(--index).findElement(By.xpath(".//h6")).getText();
+        String lessonName = lessonsTiles.get(--index).findElement(By.xpath(".//h6")).getText();
+
+        logger.info("Lesson name found: " + lessonName);
+
+        return lessonName;
     }
-    // получение продолжительности курса из
+
+    // получение продолжительности курса из  плиток
     public String getLessonDuration(int index) {
-        return lessonDuration.get(--index).getText();
+        String duration = lessonDuration.get(--index).getText();
+
+        logger.info("Course start date and duration: " + duration);
+
+        return duration;
     }
-    //  данный метод выполняет запрос к указанной веб-странице и возвращает ее DOM-структуру в виде объекта `Document`.
+    //  метод выполняет запрос к указанной веб-странице и возвращает ее DOM-структуру в виде объекта `Document`.
     protected Document getDomPage(int index) throws IOException {
         String url = lessonsTiles.get(--index).getAttribute("href");
         return Jsoup.connect(url).get();

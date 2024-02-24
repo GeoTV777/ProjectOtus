@@ -4,6 +4,8 @@ import data.catalog.LessonsCategoryData;
 import exeption.BrowserNotSupportedExeption;
 import factory.DriverFactory;
 import factory.settings.ChromeDriverSettings;
+import factory.settings.FirefoxDriverSettings;
+import factory.settings.IDriverSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -26,7 +28,20 @@ public class CourseTiles_Test {
 
     @BeforeEach
         public void init() throws BrowserNotSupportedExeption{
-        ChromeDriverSettings driverSettings = new ChromeDriverSettings();
+        IDriverSettings driverSettings = null;
+        String browserName = System.getProperty("browser.name");
+
+        switch (browserName.toLowerCase()) {
+            case "chrome":
+                driverSettings = new ChromeDriverSettings();
+                break;
+            case "firefox":
+                driverSettings = new FirefoxDriverSettings();
+                break;
+            default:
+                throw new BrowserNotSupportedExeption(browserName);
+        }
+
         this.driver = new DriverFactory(driverSettings).create();
 
         List<String> queryParams = new ArrayList<>();
@@ -34,12 +49,13 @@ public class CourseTiles_Test {
 
         this.catalogPage = new CatalogPage(driver);
         catalogPage.open(queryParams);
+        logger.info("Open browser");
     }
 
     @AfterEach
     public void driverStop() {
         if (driver != null) {
-            driver.close();
+//            driver.close();
             driver.quit();
             logger.info("Close browser");
         }
@@ -56,12 +72,13 @@ public class CourseTiles_Test {
             LessonPage lessonPage=new LessonPage(driver,"/avtomatizaciya-web-testirovaniya/");
             String expectedLessonDuration = catalogPage.getLessonDuration(i);
 
+//            catalogPage.clickRandomLessonsTile();
             lessonPage.checkHeaderLessonByIndex(i,expectedHeader);
             lessonPage.checkDescriptionLessonByIndex(i);
             lessonPage.checkLessonDuration(i,expectedLessonDuration);
             lessonPage.checkLessonFormat(i,"Онлайн");
         }
-        catalogPage.clickRandomLessonsTile();
+
     }
 
 }

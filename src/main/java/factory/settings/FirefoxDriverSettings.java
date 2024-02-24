@@ -11,12 +11,13 @@ public class FirefoxDriverSettings implements IDriverSettings{
     }
     @Override
     public AbstractDriverOptions settings() {
-
         FirefoxOptions firefoxOptions = new FirefoxOptions();
+
         firefoxOptions.addArguments("--no-sandbox");
         firefoxOptions.addArguments("--no-first-run");
         firefoxOptions.addArguments("--homepage=about:blank");
-        firefoxOptions.addArguments("--ignore-certificate-errors");
+        firefoxOptions.addArguments("--start-maximized");
+        firefoxOptions.addArguments("--kiosk");
         return firefoxOptions;
     }
 }

@@ -13,7 +13,7 @@ public  abstract class AbsCommon {
     protected WaitTools waitTools;
     protected Actions actions;
     protected Faker faker;
-    protected static Logger logger = (Logger) LogManager.getLogger("Autotest");
+    protected static Logger logger = (Logger) LogManager.getLogger("ProjectOtus");
 
 
     public AbsCommon(WebDriver driver) {

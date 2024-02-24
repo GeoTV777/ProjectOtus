@@ -6,6 +6,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 public class DriverFactory implements IDriverSettings{
@@ -18,7 +20,6 @@ public class DriverFactory implements IDriverSettings{
 
     public WebDriver create() {
         browserName = browserName.toLowerCase();
-        IDriverSettings settings= null;
 
         switch (browserName){
             case "chrome": {
@@ -26,6 +27,12 @@ public class DriverFactory implements IDriverSettings{
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--start-maximized");
                 return new ChromeDriver((ChromeOptions) driverSettings.settings());
+            }
+            case"firefox":{
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--start-maximized");
+                return new FirefoxDriver((FirefoxOptions) driverSettings.settings());
             }
         }
         throw new BrowserNotSupportedExeption(browserName);

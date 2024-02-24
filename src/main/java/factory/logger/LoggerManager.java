@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
 public class LoggerManager {
-        private static final Logger logger = (Logger) LogManager.getLogger("Autotest");
+        private static final Logger logger = (Logger) LogManager.getLogger("ProjectOtus");
 
         public static Logger getLogger() {
             return logger;

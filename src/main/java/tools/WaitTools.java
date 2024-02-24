@@ -29,4 +29,6 @@ public class WaitTools {
         return waitForCondition(ExpectedConditions.visibilityOf(element));
     }
 
+    public void until(ExpectedCondition<Boolean> aClass) {
+    }
 }
