@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pages.CalendarEventsPage;
 
+
 public class EventsPage_Test {
     private WebDriver driver;
     private CalendarEventsPage calendarEventsPage;

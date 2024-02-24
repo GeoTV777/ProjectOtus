@@ -32,12 +32,7 @@ public class CatalogPage extends AbsBasePage{
         logger.info("The number of tiles is equal to the given one");
         return this;
     }
-////     случайный клик по плитке лекций
-//    public CatalogPage clickRandomLessonsTile() {
-//        faker.options().nextElement(lessonsTiles).click();
-//        logger.info("Random tile clicked");
-//        return this;
-//    }
+
     // получение номера плитки
     public int getTilesNumbers() {
         return lessonsTiles.size();
@@ -60,6 +55,7 @@ public class CatalogPage extends AbsBasePage{
 
         return duration;
     }
+
     //  метод выполняет запрос к указанной веб-странице и возвращает ее DOM-структуру в виде объекта `Document`.
     protected Document getDomPage(int index) throws IOException {
         String url = lessonsTiles.get(--index).getAttribute("href");

@@ -1,6 +1,5 @@
 package tools;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +28,7 @@ public class WaitTools {
         return waitForCondition(ExpectedConditions.visibilityOf(element));
     }
 
-    public void until(ExpectedCondition<Boolean> aClass) {
+    public void until(ExpectedCondition<Boolean> condition) {
+        waitForCondition(condition);
     }
 }

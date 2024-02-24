@@ -23,7 +23,6 @@ public class LessonPage extends AbsBasePage {
                 "No header");
     }
 
-
     //  проверка оприсания лекций по индексу LessonPage
     public void checkDescriptionLessonByIndex(int index) throws IOException{
         Element headerPageElement = catalogPage.getDomPage(index).selectXpath("//div[contains(@class,'dZDxRw')]").get(0);

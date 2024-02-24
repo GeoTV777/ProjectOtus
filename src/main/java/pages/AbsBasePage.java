@@ -21,6 +21,7 @@ public abstract class AbsBasePage extends AbsCommon {
     public void open() {
         driver.get(BASE_URL + path);
     }
+
     public void open(List<String> queryParams) {
         String url = BASE_URL + this.path + "?" + String.join("&", queryParams);
 

@@ -55,7 +55,6 @@ public class CourseTiles_Test {
     @AfterEach
     public void driverStop() {
         if (driver != null) {
-//            driver.close();
             driver.quit();
             logger.info("Close browser");
         }
@@ -69,10 +68,9 @@ public class CourseTiles_Test {
     public void checkDataOnLessonPage()throws IOException {
         for(int i=1; i<catalogPage.getTilesNumbers(); i++){
             String expectedHeader = catalogPage.getLessonNameByIndex(i);
-            LessonPage lessonPage=new LessonPage(driver,"/avtomatizaciya-web-testirovaniya/");
+            LessonPage lessonPage=new LessonPage(driver,"/qa-lead/");
             String expectedLessonDuration = catalogPage.getLessonDuration(i);
 
-//            catalogPage.clickRandomLessonsTile();
             lessonPage.checkHeaderLessonByIndex(i,expectedHeader);
             lessonPage.checkDescriptionLessonByIndex(i);
             lessonPage.checkLessonDuration(i,expectedLessonDuration);
